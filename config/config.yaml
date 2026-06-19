@@ -1,0 +1,27 @@
+api:
+  base_url: "https://footballista.ru/"
+  timeout_seconds: 30
+  page_size: 50
+
+database:
+  path: "data/afl_predictor.db"
+
+# Одна лига для загрузки, обучения и инференса.
+# Список доступных: python scripts/list_leagues.py
+league:
+  id: 394
+  name: "AFL Moscow 8x8"
+
+fetch:
+  finished_state_code: 4
+
+training:
+  form_window: 5
+  h2h_window: 5
+  test_fraction: 0.2          # последние 20% матчей по дате — тест
+  random_state: 42
+  models_dir: "data/models"
+  reports_dir: "data/reports"  # PNG-графики для отчётов
+  generate_plots: true         # false — только модели, без графиков
+  optuna_trials: 30           # 0 = без подбора, дефолтные параметры LightGBM
+  optuna_timeout_seconds: 600

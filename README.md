@@ -55,6 +55,18 @@ python scripts/train_model.py
 python scripts/predict_match.py <home_id> <away_id>
 ```
 
+### Google Colab
+
+В Colab уже стоят NumPy 2, pandas, scikit-learn и LightGBM (Python 3.13). Отдельный даунгрейд NumPy не нужен и вреден: у NumPy 1.x нет колёс под Python 3.13, pip собирает его из исходников десятки минут и после этого ломает предустановленные пакеты.
+
+```python
+!git clone https://github.com/BrasD99/afl-predictor.git
+%cd afl-predictor
+!pip install -r requirements.txt
+```
+
+Перезапуск runtime не нужен. Дальше — распаковка `models.zip` в `data/` и `python scripts/fetch_matches.py`, как в разделе «Готовые веса модели».
+
 <details>
 <summary><b>Консольные команды</b></summary>
 
@@ -108,7 +120,7 @@ python scripts/predict_match.py <home_id> <away_id>
 
 Путь к весам задаётся в `config/config.yaml` → `training.models_dir` (по умолчанию `data/models`).
 
-Если при загрузке модели ошибка совместимости NumPy — установите `numpy<2`, как в `requirements.txt`, или переобучите локально: `python scripts/train_model.py`.
+Веса рассчитаны на NumPy 2 (то, что уже стоит в Colab). Если загрузка падает с ошибкой совместимости — поставьте зависимости из `requirements.txt` и перезапустите сессию, либо переобучите: `python scripts/train_model.py`. Не ставьте `numpy<2`: на Python 3.13 это сборка из исходников.
 
 ---
 
@@ -266,7 +278,7 @@ afl-predictor/
 
 - Одна лига на конфиг — модель привязана к `league.id`
 - Загрузка **insert-only** — уже сохранённые матчи не обновляются
-- Требуется `numpy<2` для совместимости сохранённых моделей
+- Нужен NumPy 2 (`numpy>=2` в `requirements.txt`)
 
 ---
 

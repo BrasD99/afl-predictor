@@ -61,11 +61,11 @@ def format_env_mismatch_hint(models_dir: Path) -> str:
         [
             "",
             "Решения:",
-            "  1) Переобучить на этой машине (рекомендуется):",
-            "     python scripts/train_model.py",
+            "  1) Поставить зависимости проекта и перезапустить интерпретатор:",
+            "     pip install -r requirements.txt",
             "",
-            "  2) Подогнать версии под обучение, например:",
-            '     pip install "numpy<2" "scikit-learn==1.4.2" joblib',
+            "  2) Переобучить на этой машине:",
+            "     python scripts/train_model.py",
         ]
     )
     return "\n".join(lines)
